@@ -1,0 +1,6 @@
+name: findent
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - findent
