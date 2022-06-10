@@ -1,10 +1,15 @@
 """
+Wrapper to apply the findent Fortran code formatter.
+
 "Findent reads from STDIN, writes to STDOUT."
 This wrapper facilitates passing a file path and modifying that file.
 """
 from __future__ import annotations
 
 from pathlib import Path
+
+
+__version__ = "0.1.0.dev0"
 
 
 def format_with_findent(orig: str, *, args: list[str] | None = None) -> str:
@@ -22,9 +27,10 @@ def format_with_findent(orig: str, *, args: list[str] | None = None) -> str:
 def cli():
     import argparse
 
-    parser = argparse.ArgumentParser(description="format a file in-place with findent",
+    parser = argparse.ArgumentParser(
+        description="format a file in-place with findent",
         epilog=(
-            "IMPORTANT: wrapper-specific arguments like `--diff` must precede the file name, "
+            "IMPORTANT: currently, wrapper-specific arguments like `--diff` must precede the file name, "
             "since everything following the file name is passed to findent."
         ),
     )
@@ -81,9 +87,7 @@ def cli():
     if args.diff:
         import difflib
 
-        diff = difflib.unified_diff(
-            orig.splitlines(), new.splitlines(), lineterm="",
-        )
+        diff = difflib.unified_diff(orig.splitlines(), new.splitlines(), lineterm="")
         print("\n".join(diff))
         return 0
 

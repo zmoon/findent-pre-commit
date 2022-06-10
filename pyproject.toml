@@ -1,0 +1,15 @@
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "findent_wrapper"
+authors = [{name = "zmoon", email = "zmoon92@gmail.com"}]
+readme = "README.md"
+license = {file = "LICENSE"}
+classifiers = ["License :: OSI Approved :: The Unlicense (Unlicense)"]
+dynamic = ["version", "description"]
+python-requires = "~=3.7"
+
+[project.scripts]
+findent-wrapper = "findent_wrapper:cli"

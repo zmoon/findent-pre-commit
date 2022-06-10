@@ -1,16 +1,35 @@
+# findent from conda, using findent-wrapper
 - id: findent
   name: Format Fortran code using findent
-  entry: findent
+  entry: findent-wrapper
+  description: Uses findent from conda-forge and findent-wrapper.
   language: conda
+  pass_filenames: true
   files: \.[fF](90|95|03)$
   types: [text]
   require_serial: false
 
+# wfindent from conda findent
+# TODO
+
+# system findent, using findent-wrapper
 - id: findent-system
   name: Format Fortran code using findent
-  entry: findent
-  description: Use system copy of findent available on PATH.
-  language: system
+  entry: findent-wrapper
+  description: Uses system copy of findent available on PATH and findent-wrapper.
+  language: python
+  pass_filenames: true
   files: \.[fF](90|95|03)$
   types: [text]
   require_serial: false
+
+# system wfindent
+- id: wfindent-system
+  name: Format Fortran code using findent
+  entry: wfindent
+  description: Uses system copy of wfindent available on PATH.
+  language: system
+  pass_filenames: true
+  files: \.[fF](90|95|03)$
+  types: [text]
+  require_serial: true
