@@ -2,7 +2,7 @@
   name: Format Fortran code using findent
   entry: findent
   language: conda
-  files: fortran
+  files: \.[fF](90|95|03)$
   types: [text]
   require_serial: false
 
@@ -11,7 +11,6 @@
   entry: findent
   description: Use system copy of findent available on PATH.
   language: system
-  files: fortran
+  files: \.[fF](90|95|03)$
   types: [text]
   require_serial: false
-
