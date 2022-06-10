@@ -5,7 +5,7 @@
   description: Uses findent from conda-forge and findent-wrapper.
   language: conda
   pass_filenames: true
-  files: \.[fF](90|95|03)$
+  files: \.[fF](90|95|03|08)$
   types: [text]
   require_serial: false
 
@@ -13,10 +13,10 @@
 - id: wfindent
   name: Format Fortran code using findent
   entry: wfindent
-  description: Uses wfident from conda-forge.
+  description: Uses wfindent from conda-forge.
   language: conda
   pass_filenames: true
-  files: \.[fF](90|95|03)$
+  files: \.[fF](90|95|03|08)$
   types: [text]
   require_serial: true
 
@@ -27,7 +27,7 @@
   description: Uses system copy of findent available on PATH and findent-wrapper.
   language: python
   pass_filenames: true
-  files: \.[fF](90|95|03)$
+  files: \.[fF](90|95|03|08)$
   types: [text]
   require_serial: false
 
@@ -38,6 +38,6 @@
   description: Uses system copy of wfindent available on PATH.
   language: system
   pass_filenames: true
-  files: \.[fF](90|95|03)$
+  files: \.[fF](90|95|03|08)$
   types: [text]
   require_serial: true
