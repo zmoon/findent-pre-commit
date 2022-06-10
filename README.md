@@ -6,7 +6,7 @@ as a [pre-commit](https://pre-commit.com/) hook.
 
 ## Requirements
 
-pre-commit, and:
+[pre-commit](https://pre-commit.com/#install), and:
 
 * The `wfindent` and `findent` hooks require `conda` available on `PATH`
   (or `mamba`, with `PRE_COMMIT_USE_MAMBA=1`).
