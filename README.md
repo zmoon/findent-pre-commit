@@ -44,10 +44,10 @@ To pass args to `findent`, use, for example:
 
 ## Wrapper
 
-To install the Python wrapper `findent-wrapper`:
+To install the Python wrapper `findent-wrapper` with [`pipx`](https://pypa.github.io/pipx/):
 
 ```
-pipx install https://github.com/zmoon/findent-pre-commit
+pipx install https://github.com/zmoon/findent-pre-commit/archive/main.zip
 ```
 
 Note that the `wfindent` tool distributed with findent and referenced above provides in-place editing
