@@ -2,7 +2,7 @@
 Wrapper to apply the findent Fortran code formatter.
 
 "Findent reads from STDIN, writes to STDOUT."
-This wrapper facilitates passing a file path and modifying that file.
+This wrapper facilitates in-place modification.
 """
 from __future__ import annotations
 
@@ -28,19 +28,18 @@ def cli():
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="format a file in-place with findent",
+        description="format files in-place with findent",
         epilog=(
-            "IMPORTANT: currently, wrapper-specific arguments like `--diff` must precede the file name, "
-            "since everything following the file name is passed to findent."
+            "IMPORTANT: currently, wrapper-specific arguments like `--diff` must precede file names, "
+            "since everything following the file names is passed to findent."
         ),
     )
     parser.add_argument(
-        "file",
-        metavar="FILE",
+        "files",
+        metavar="FILES",
         type=str,
-        nargs="?",
-        default=None,
-        help="file to format (path)",
+        nargs="*",
+        help="files to format (paths)",
     )
     parser.add_argument(
         "--diff",
@@ -69,33 +68,37 @@ def cli():
         subprocess.run(["findent", "--help"])
         return 0
 
-    if args.file is None:
-        print("error: must pass file to be formatted")
+    if not args.files:
+        print("error: must pass file(s) to be formatted")
         parser.print_usage()
         return 2
 
-    p = Path(args.file)
-    if not p.is_file():
-        print(f"error: file {p} does not exist")
-        return 2
+    for fp in args.files:
+        p = Path(fp)
+        if not p.is_file():
+            print(f"error: file {p} does not exist")
+            return 2
 
-    with open(p, "r") as f:
-        orig = f.read()
+        with open(p, "r") as f:
+            orig = f.read()
 
-    new = format_with_findent(orig, args=args.findent_args)
+        new = format_with_findent(orig, args=args.findent_args)
 
-    if args.diff:
-        import difflib
+        if args.diff:
+            import difflib
 
-        diff = difflib.unified_diff(orig.splitlines(), new.splitlines(), lineterm="")
-        print("\n".join(diff))
-        return 0
+            diff = difflib.unified_diff(
+                orig.splitlines(), new.splitlines(), lineterm="", fromfile=str(p)
+            )
+            print("\n".join(diff))
 
-    else:
-        with open(p, "w") as f:
-            f.write(new)
+        else:
+            with open(p, "w") as f:
+                f.write(new)
 
-    # TODO: --check option?
+        # TODO: --check option?
+
+    return 0
 
 
 if __name__ == "__main__":
