@@ -52,9 +52,11 @@ def cli():
         nargs=argparse.REMAINDER,
         help="additional arguments (...) are passed to findent. Must follow wrapper-specific arguments!",
     )
+    # TODO: try intermixed parse?
     args = parser.parse_args()
     # print(args)
 
+    # TODO: main() fn
     if args.findent_help:
         import subprocess
 
