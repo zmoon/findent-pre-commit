@@ -5,7 +5,11 @@ channels:
 dependencies:
   - findent
   #
+  # Adding these makes the env creation take ~ 2x as long (e.g. 16 s vs 8)
+  # but enables using `findent-wrapper`. For `wfindent` hook we don't need it,
+  # but with `additional_dependencies` in the hook config we can only add conda deps,
+  # not local/PyPI.
   - python >=3.7
   - pip
   - pip:
-    - '-e .'
+    - '.'

@@ -1,4 +1,4 @@
-# findent from conda, using findent-wrapper
+# findent from conda-forge, using findent-wrapper
 - id: findent
   name: Format Fortran code using findent
   entry: findent-wrapper
@@ -9,8 +9,16 @@
   types: [text]
   require_serial: false
 
-# wfindent from conda findent
-# TODO
+# wfindent from conda-forge findent
+- id: wfindent
+  name: Format Fortran code using findent
+  entry: wfindent
+  description: Uses wfident from conda-forge.
+  language: conda
+  pass_filenames: true
+  files: \.[fF](90|95|03)$
+  types: [text]
+  require_serial: true
 
 # system findent, using findent-wrapper
 - id: findent-system
