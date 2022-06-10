@@ -11,7 +11,7 @@ pre-commit, and:
 * The `wfindent` and `findent` hooks require `conda` available on `PATH`
   (or `mamba`, with `PRE_COMMIT_USE_MAMBA=1`).
 * The `wfindent-system` hook requires `wfindent` available on `PATH`.
-* The `findent` hook requires `findent` available on `PATH`.
+* The `findent-system` hook requires `findent` available on `PATH`.
 
 
 ## Usage
