@@ -1,0 +1,17 @@
+- id: findent
+  name: Format Fortran code using findent
+  entry: findent
+  language: conda
+  files: fortran
+  types: [text]
+  require_serial: false
+
+- id: findent-system
+  name: Format Fortran code using findent
+  entry: findent
+  description: Use system copy of findent available on PATH.
+  language: system
+  files: fortran
+  types: [text]
+  require_serial: false
+
