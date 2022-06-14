@@ -41,3 +41,29 @@
   files: \.[fF](90|95|03|08)$
   types: [text]
   require_serial: true
+
+# PyPI findent, using findent-wrapper
+- id: findent-pypi
+  name: Format Fortran code using findent
+  entry: findent-wrapper
+  description: Uses findent from PyPI and findent-wrapper.
+  language: python
+  additional_dependencies:
+    - findent
+  pass_filenames: true
+  files: \.[fF](90|95|03|08)$
+  types: [text]
+  require_serial: false
+
+# wfindent from PyPI findent
+- id: wfindent-pypi
+  name: Format Fortran code using findent
+  entry: wfindent
+  description: Uses wfindent from PyPI.
+  language: python
+  additional_dependencies:
+    - findent
+  pass_filenames: true
+  files: \.[fF](90|95|03|08)$
+  types: [text]
+  require_serial: true

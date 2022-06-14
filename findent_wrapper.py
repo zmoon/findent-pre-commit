@@ -6,8 +6,13 @@ This wrapper facilitates in-place modification.
 """
 from __future__ import annotations
 
+import logging
+import sys
 from pathlib import Path
 
+
+logging.basicConfig(stream=sys.stdout)
+logger = logging.getLogger(__name__)
 
 __version__ = "0.1.0.dev0"
 
@@ -18,13 +23,13 @@ def format_with_findent(orig: str, *, args: list[str] | None = None) -> str:
     cmd = ["findent"]
     if args is not None:
         cmd.extend(args)
-    # print(cmd)
+    logger.debug(f"cmd: {cmd}")
     cp = subprocess.run(cmd, check=True, input=orig, capture_output=True, text=True)
 
     return cp.stdout
 
 
-def cli():
+def cli() -> int:
     import argparse
 
     parser = argparse.ArgumentParser(
@@ -57,9 +62,21 @@ def cli():
         nargs=argparse.REMAINDER,
         help="additional arguments (...) are passed to findent. Must follow wrapper-specific arguments!",
     )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="print debug messages",
+    )
     # TODO: try intermixed parse?
     args = parser.parse_args()
-    # print(args)
+
+    if args.debug:
+        import shutil
+
+        logger.setLevel(logging.DEBUG)
+        logger.debug(f"findent path: {shutil.which('findent')}")
+
+    logger.debug(f"parsed args: {args}")
 
     # TODO: main() fn
     if args.findent_help:
