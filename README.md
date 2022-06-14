@@ -53,3 +53,27 @@ pipx install https://github.com/zmoon/findent-pre-commit/archive/main.zip
 Note that the `wfindent` tool distributed with findent and referenced above provides in-place editing
 using shell scripting.
 `findent-wrapper` adds a `--diff` option (and maybe more options in the future...).
+
+
+## Another way
+
+As an alternative to the `wfindent-system` hook defined in this repo, it is possible
+to use a [local hook](https://pre-commit.com/#repository-local-hooks) setup.
+
+```yaml
+# .pre-commit-config.yaml
+
+- repo: local
+  hooks:
+    - id: wfindent
+      name: Format Fortran code using findent
+      entry: wfindent
+      description: Uses system copy of wfindent available on PATH.
+      language: system
+      pass_filenames: true
+      files: \.[fF](90|95|03|08)$
+      types: [text]
+      require_serial: true
+```
+
+Note that `findent` cannot be used in this way, since it only reads from STDIN.
