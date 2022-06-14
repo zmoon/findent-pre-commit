@@ -35,9 +35,10 @@ def cli() -> int:
     parser = argparse.ArgumentParser(
         description="format files in-place with findent",
         epilog=(
-            "IMPORTANT: currently, wrapper-specific arguments like `--diff` must precede file names, "
-            "since everything following the file names is passed to findent."
-        ),
+            "NOTE: although it is not required, for clarity, "
+            "wrapper-specific arguments like `--diff` should precede file names, "
+            "and findent arguments like `-i3` should follow the follow names."
+        ),  # or the other way around?
     )
     parser.add_argument(
         "files",
@@ -57,18 +58,11 @@ def cli() -> int:
         help="print findent help (`findent --help`) and exit",
     )
     parser.add_argument(
-        "findent_args",
-        metavar="FINDENT-ARGS",
-        nargs=argparse.REMAINDER,
-        help="additional arguments (...) are passed to findent. Must follow wrapper-specific arguments!",
-    )
-    parser.add_argument(
         "--debug",
         action="store_true",
         help="print debug messages",
     )
-    # TODO: try intermixed parse?
-    args = parser.parse_args()
+    args, findent_args = parser.parse_known_intermixed_args()
 
     if args.debug:
         import shutil
@@ -77,6 +71,7 @@ def cli() -> int:
         logger.debug(f"findent path: {shutil.which('findent')}")
 
     logger.debug(f"parsed args: {args}")
+    logger.debug(f"findent (extra) args: {findent_args}")
 
     # TODO: main() fn
     if args.findent_help:
@@ -99,7 +94,7 @@ def cli() -> int:
         with open(p, "r") as f:
             orig = f.read()
 
-        new = format_with_findent(orig, args=args.findent_args)
+        new = format_with_findent(orig, args=findent_args)
 
         if args.diff:
             import difflib
