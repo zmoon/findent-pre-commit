@@ -53,7 +53,7 @@ def cli() -> int:
     parser.add_argument(
         "--diff",
         action="store_true",
-        help="print diff instead of modifying the file",
+        help="print diff instead of modifying",
     )
     parser.add_argument(
         "--findent-help",
@@ -61,9 +61,14 @@ def cli() -> int:
         help="print findent help (`findent --help`) and exit",
     )
     parser.add_argument(
+        "--findent-version-pin",
+        help="error if the detected findent is not this version",
+        default=None,
+    )
+    parser.add_argument(
         "--debug",
         action="store_true",
-        help="print debug messages",
+        help="print findent-wrapper debug messages",
     )
     args, findent_args = parser.parse_known_intermixed_args()
 
@@ -83,6 +88,18 @@ def cli() -> int:
 
         subprocess.run([FINDENT_PATH, "--help"])
         return 0
+
+    if args.findent_version_pin:
+        import subprocess
+
+        cp = subprocess.run(["findent", "--version"], check=True, text=True, capture_output=True)
+        v = cp.stdout.split()[2]
+        if v != args.findent_version_pin:
+            print(
+                f"error: findent-version-pin is {args.findent_version_pin!r}, "
+                f"but detected findent version is {v!r}"
+            )
+            return 1
 
     if not args.files:
         print("error: must pass file(s) to be formatted")
