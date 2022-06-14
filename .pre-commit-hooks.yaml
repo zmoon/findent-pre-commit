@@ -1,5 +1,5 @@
 # findent from conda-forge, using findent-wrapper
-- id: findent
+- id: findent-conda
   name: Format Fortran code using findent
   entry: findent-wrapper
   description: Uses findent from conda-forge and findent-wrapper.
@@ -10,7 +10,7 @@
   require_serial: false
 
 # wfindent from conda-forge findent
-- id: wfindent
+- id: wfindent-conda
   name: Format Fortran code using findent
   entry: wfindent
   description: Uses wfindent from conda-forge.
