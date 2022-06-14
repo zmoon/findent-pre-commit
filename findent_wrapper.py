@@ -7,6 +7,7 @@ This wrapper facilitates in-place modification.
 from __future__ import annotations
 
 import logging
+import os
 import sys
 from pathlib import Path
 
@@ -16,11 +17,13 @@ logger = logging.getLogger(__name__)
 
 __version__ = "0.1.0.dev0"
 
+FINDENT_PATH = os.environ.get("FINDENT", "findent")
+
 
 def format_with_findent(orig: str, *, args: list[str] | None = None) -> str:
     import subprocess
 
-    cmd = ["findent"]
+    cmd = [FINDENT_PATH]
     if args is not None:
         cmd.extend(args)
     logger.debug(f"cmd: {cmd}")
@@ -68,7 +71,8 @@ def cli() -> int:
         import shutil
 
         logger.setLevel(logging.DEBUG)
-        logger.debug(f"findent path: {shutil.which('findent')}")
+        logger.debug(f"findent path setting: {FINDENT_PATH}")
+        logger.debug(f"findent absolute path: {shutil.which(FINDENT_PATH)}")
 
     logger.debug(f"parsed args: {args}")
     logger.debug(f"findent (extra) args: {findent_args}")
@@ -77,7 +81,7 @@ def cli() -> int:
     if args.findent_help:
         import subprocess
 
-        subprocess.run(["findent", "--help"])
+        subprocess.run([FINDENT_PATH, "--help"])
         return 0
 
     if not args.files:
