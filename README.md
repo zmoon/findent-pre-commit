@@ -41,6 +41,34 @@ To pass args to `findent`, use, for example:
         args: [--indent=4, -r0]
 ```
 
+### Specify `findent` version
+
+There are multiple ways to achieve this:
+
+* for `findent-system`, use the `--findent-version-pin` arg, which will check the version before running
+
+  ```yaml
+          args: [--findent-version-pin=4.3.3]
+  ```
+
+* for `findent-pypi`/`wfindent-pypi`, pin `findent-pypi` in `additional_dependencies`
+
+  ```yaml
+          additional_dependencies: [findent-pypi==4.3.1]
+  ```
+
+  - findent-pypi releases can be found [on GitHub](https://github.com/gnikit/findent-pypi/releases)
+  - releases since `4.2.6.post0` should work for Windows (in addition to Unix-like)
+
+* for `findent-conda`/`wfindent-conda`, pin `findent` in `additional_dependencies`
+
+  ```yaml
+          additional_dependencies: [findent==4.3.2]
+  ```
+
+  - available versions can be found [on conda-forge](https://anaconda.org/conda-forge/findent/files)
+
+* for `wfindent-system`, there is currently no way to ensure a certain `findent` version is being used
 
 ## Wrapper
 
