@@ -51,10 +51,10 @@ There are multiple ways to achieve this:
           args: [--findent-version-pin=4.3.3]
   ```
 
-* for `findent-pypi`/`wfindent-pypi`, pin `findent-pypi` in `additional_dependencies`
+* for `findent-pypi`/`wfindent-pypi`, pin `findent` in `additional_dependencies`
 
   ```yaml
-          additional_dependencies: [findent-pypi==4.3.1]
+          additional_dependencies: [findent==4.3.1]
   ```
 
   - findent-pypi releases can be found [on GitHub](https://github.com/gnikit/findent-pypi/releases)
