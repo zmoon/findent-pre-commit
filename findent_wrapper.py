@@ -27,7 +27,7 @@ def format_with_findent(orig: str, *, args: list[str] | None = None) -> str:
     if args is not None:
         cmd.extend(args)
     logger.debug(f"cmd: {cmd}")
-    cp = subprocess.run(cmd, check=True, input=orig, capture_output=True, text=True)
+    cp = subprocess.run(cmd, check=True, input=orig, capture_output=True, text=True, encoding="utf-8")
 
     return cp.stdout
 
@@ -112,7 +112,7 @@ def cli() -> int:
             print(f"error: file {p} does not exist")
             return 2
 
-        with open(p, "r") as f:
+        with open(p, "r", encoding="utf-8") as f:
             orig = f.read()
 
         new = format_with_findent(orig, args=findent_args)
@@ -126,7 +126,7 @@ def cli() -> int:
             print("\n".join(diff))
 
         else:
-            with open(p, "w") as f:
+            with open(p, "w", encoding="utf-8") as f:
                 f.write(new)
 
         # TODO: --check option?
