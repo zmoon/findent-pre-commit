@@ -15,7 +15,7 @@ from pathlib import Path
 logging.basicConfig(stream=sys.stdout)
 logger = logging.getLogger(__name__)
 
-__version__ = "0.1.0.dev0"
+__version__ = "0.1.0.dev1"
 
 FINDENT_PATH = os.environ.get("FINDENT", "findent")
 
