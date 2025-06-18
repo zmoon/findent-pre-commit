@@ -92,7 +92,7 @@ def cli() -> int:
     if args.findent_version_pin:
         import subprocess
 
-        cp = subprocess.run(["findent", "--version"], check=True, text=True, capture_output=True)
+        cp = subprocess.run([FINDENT_PATH, "--version"], check=True, text=True, capture_output=True)
         v = cp.stdout.split()[2]
         if v != args.findent_version_pin:
             print(
